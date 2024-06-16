@@ -42,11 +42,12 @@ TerminalMix8.init = function () {
   // control surface. (Mixxx will be initialized with current values)
   midi.sendSysexMsg(ControllerStatusSysex, ControllerStatusSysex.length);
   // midi.sendShortMsg(0x94, 00, 0x30);
-  loadedTrack(1, 75, [0x30, 0x4c], 0x94);
-  loadedTrack(2, 75, [0x30, 0x4c], 0x95);
-  loadedTrack(3, 75, [0x30, 0x4c], 0x96);
-  loadedTrack(4, 75, [0x30, 0x4c], 0x97);
-  initMethods();
+
+  // loadedTrack(1, 75, [0x30, 0x4c], 0x94);
+  // loadedTrack(2, 75, [0x30, 0x4c], 0x95);
+  // loadedTrack(3, 75, [0x30, 0x4c], 0x96);
+  // loadedTrack(4, 75, [0x30, 0x4c], 0x97);
+  // initMethods();
 };
 
 var initMethods = function () {

@@ -428,6 +428,218 @@
       </control>
       <!-- End Crossfader orientation -->
       <!-- TODO: Crossfader curve https://mixxx.discourse.group/t/crossfader-curve-mapping/18424/3 -->
+      <!-- #######                                           -->
+      <!-- #       ###### ###### ######  ####  #####  ####   -->
+      <!-- #       #      #      #      #    #   #   #       -->
+      <!-- #####   #####  #####  #####  #        #    ####   -->
+      <!-- #       #      #      #      #        #        #  -->
+      <!-- #       #      #      #      #    #   #   #    #  -->
+      <!-- ####### #      #      ######  ####    #    ####   -->
+      <!-- EffectRack1 EffectUnit1 -->
+      <control>
+        <group>[EffectRack1_EffectUnit1_Effect1]</group>
+        <key>enabled</key>
+        <description>Enable Effect</description>
+        <status>0x90</status>
+        <midino>0x1A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit1_Effect1]</group>
+        <key>meta</key>
+        <description>Effect value</description>
+        <status>0xB0</status>
+        <midino>0x1A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit1_Effect2]</group>
+        <key>enabled</key>
+        <description>Enable Effect</description>
+        <status>0x90</status>
+        <midino>0x1B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit1_Effect2]</group>
+        <key>meta</key>
+        <description>Effect value</description>
+        <status>0xB0</status>
+        <midino>0x1B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit1_Effect3]</group>
+        <key>enabled</key>
+        <description>Enable Effect</description>
+        <status>0x90</status>
+        <midino>0x1C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit1_Effect3]</group>
+        <key>meta</key>
+        <description>Effect value</description>
+        <status>0xB0</status>
+        <midino>0x1C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End EffectRack1 EffectUnit1 -->
+      <!-- EffectRack1 EffectUnit2 -->
+      <control>
+        <group>[EffectRack1_EffectUnit2_Effect1]</group>
+        <key>enabled</key>
+        <description>Enable Effect</description>
+        <status>0x91</status>
+        <midino>0x1A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit2_Effect1]</group>
+        <key>meta</key>
+        <description>Effect value</description>
+        <status>0xB1</status>
+        <midino>0x1A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit2_Effect2]</group>
+        <key>enabled</key>
+        <description>Enable Effect</description>
+        <status>0x91</status>
+        <midino>0x1B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit2_Effect2]</group>
+        <key>meta</key>
+        <description>Effect value</description>
+        <status>0xB1</status>
+        <midino>0x1B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit2_Effect3]</group>
+        <key>enabled</key>
+        <description>Enable Effect</description>
+        <status>0x91</status>
+        <midino>0x1C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit2_Effect3]</group>
+        <key>meta</key>
+        <description>Effect value</description>
+        <status>0xB1</status>
+        <midino>0x1C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End EffectRack1 EffectUnit2 -->
+      <!-- Effects Deck Assignment -->
+      <control>
+        <group>[EffectRack1_EffectUnit1]</group>
+        <key>group_[Channel1]_enable</key>
+        <description>Assign FX to Deck 1</description>
+        <status>0x90</status>
+        <midino>0x18</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit2]</group>
+        <key>group_[Channel1]_enable</key>
+        <description>Assign FX to Deck 2</description>
+        <status>0x90</status>
+        <midino>0x19</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit1]</group>
+        <key>group_[Channel2]_enable</key>
+        <description>Assign FX to Deck 1</description>
+        <status>0x91</status>
+        <midino>0x18</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit2]</group>
+        <key>group_[Channel2]_enable</key>
+        <description>Assign FX to Deck 2</description>
+        <status>0x91</status>
+        <midino>0x19</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit1]</group>
+        <key>group_[Channel3]_enable</key>
+        <description>Assign FX to Deck 3</description>
+        <status>0x92</status>
+        <midino>0x18</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit2]</group>
+        <key>group_[Channel3]_enable</key>
+        <description>Assign FX to Deck 4</description>
+        <status>0x92</status>
+        <midino>0x19</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit1]</group>
+        <key>group_[Channel4]_enable</key>
+        <description>Assign FX to Deck 3</description>
+        <status>0x93</status>
+        <midino>0x18</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EffectRack1_EffectUnit2]</group>
+        <key>group_[Channel4]_enable</key>
+        <description>Assign FX to Deck 4</description>
+        <status>0x93</status>
+        <midino>0x19</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
     </controls>
     <outputs/>
   </controller>
