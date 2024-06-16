@@ -762,6 +762,49 @@
           <normal/>
         </options>
       </control>
+      <!-- ######  ### #######  #####  #     #  -->
+      <!-- #     #  #     #    #     # #     #  -->
+      <!-- #     #  #     #    #       #     #  -->
+      <!-- ######   #     #    #       #######  -->
+      <!-- #        #     #    #       #     #  -->
+      <!-- #        #     #    #     # #     #  -->
+      <!-- #       ###    #     #####  #     #  -->
+      <control>
+        <group>[Channel1]</group>
+        <key>TerminalMix8.pitchSlider</key>
+        <description>Pitch Slider Deck 1</description>
+        <status>0xE0</status>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>TerminalMix8.pitchSlider</key>
+        <description>Pitch Slider Deck 2</description>
+        <status>0xE1</status>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>TerminalMix8.pitchSlider</key>
+        <description>Pitch Slider Deck 3</description>
+        <status>0xE2</status>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>TerminalMix8.pitchSlider</key>
+        <description>Pitch Slider Deck 4</description>
+        <status>0xE3</status>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
     </controls>
     <outputs/>
   </controller>

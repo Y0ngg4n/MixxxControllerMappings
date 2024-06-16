@@ -159,3 +159,16 @@ TerminalMix8.preview = function (channel, control, value, status, group) {
     }
   }
 };
+
+// ######  ### #######  #####  #     #
+// #     #  #     #    #     # #     #
+// #     #  #     #    #       #     #
+// ######   #     #    #       #######
+// #        #     #    #       #     #
+// #        #     #    #     # #     #
+// #       ###    #     #####  #     #
+
+TerminalMix8.pitchSlider = function (channel, control, value, status, group) {
+  // invert pitch slider (down=faster) so it matches the labels on controller
+  engine.setValue(group, "rate", -script.midiPitch(control, value, status));
+};
