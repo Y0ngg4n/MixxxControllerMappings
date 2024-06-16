@@ -833,6 +833,16 @@
         </options>
       </control>
       <control>
+        <group>[Channel1]</group>
+        <key>TerminalMix8.pitchBend</key>
+        <description>If you turn the Wheel not in Jog mode</description>
+        <status>0xB0</status>
+        <midino>0x07</midino>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
+      <control>
         <group>[Channel2]</group>
         <key>TerminalMix8.wheelTouch</key>
         <description>If you touch the Wheel</description>
@@ -848,6 +858,16 @@
         <description>If you turn the Wheel</description>
         <status>0xB1</status>
         <midino>0x06</midino>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>TerminalMix8.pitchBend</key>
+        <description>If you turn the Wheel not in Jog mode</description>
+        <status>0xB1</status>
+        <midino>0x07</midino>
         <options>
           <script-binding/>
         </options>
@@ -873,6 +893,16 @@
         </options>
       </control>
       <control>
+        <group>[Channel3]</group>
+        <key>TerminalMix8.pitchBend</key>
+        <description>If you turn the Wheel not in Jog mode</description>
+        <status>0xB2</status>
+        <midino>0x07</midino>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
+      <control>
         <group>[Channel4]</group>
         <key>TerminalMix8.wheelTouch</key>
         <description>If you touch the Wheel</description>
@@ -892,6 +922,191 @@
           <script-binding/>
         </options>
       </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>TerminalMix8.pitchBend</key>
+        <description>If you turn the Wheel not in Jog mode</description>
+        <status>0xB3</status>
+        <midino>0x07</midino>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
+      <!-- ######                       -->
+      <!-- #     # #        ##   #   #  -->
+      <!-- #     # #       #  #   # #   -->
+      <!-- ######  #      #    #   #    -->
+      <!-- #       #      ######   #    -->
+      <!-- #       #      #    #   #    -->
+      <!-- #       ###### #    #   #    -->
+      <!-- Sync -->
+      <control>
+        <group>[Channel1]</group>
+        <key>sync_enabled</key>
+        <description>Sync</description>
+        <status>0x90</status>
+        <midino>0x02</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>sync_enabled</key>
+        <description>Sync</description>
+        <status>0x91</status>
+        <midino>0x02</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>sync_enabled</key>
+        <description>Sync</description>
+        <status>0x92</status>
+        <midino>0x02</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>sync_enabled</key>
+        <description>Sync.</description>
+        <status>0x93</status>
+        <midino>0x02</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End sync -->
+      <!-- Stutter -->
+      <control>
+        <group>[Channel1]</group>
+        <key>play_stutter</key>
+        <description>Stutter</description>
+        <status>0x90</status>
+        <midino>0x03</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>play_stutter</key>
+        <description>Stutter</description>
+        <status>0x91</status>
+        <midino>0x03</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>play_stutter</key>
+        <description>Stutter</description>
+        <status>0x92</status>
+        <midino>0x03</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>play_stutter</key>
+        <description>Stutter</description>
+        <status>0x93</status>
+        <midino>0x03</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Stutter -->
+      <!-- Cue -->
+      <control>
+        <group>[Channel1]</group>
+        <key>cue_default</key>
+        <description>Cue</description>
+        <status>0x90</status>
+        <midino>0x04</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>cue_default</key>
+        <description>Cue</description>
+        <status>0x91</status>
+        <midino>0x04</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>cue_default</key>
+        <description>Cue</description>
+        <status>0x92</status>
+        <midino>0x04</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>cue_default</key>
+        <description>Cue</description>
+        <status>0x93</status>
+        <midino>0x04</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Cue -->
+      <!-- Play -->
+      <control>
+        <group>[Channel1]</group>
+        <key>play</key>
+        <description>Play</description>
+        <status>0x90</status>
+        <midino>0x05</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>play</key>
+        <description>Play</description>
+        <status>0x91</status>
+        <midino>0x05</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>play</key>
+        <description>Play</description>
+        <status>0x92</status>
+        <midino>0x05</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>play</key>
+        <description>Play</description>
+        <status>0x93</status>
+        <midino>0x05</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Play -->
     </controls>
     <outputs/>
   </controller>

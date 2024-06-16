@@ -41,7 +41,7 @@ TerminalMix8.init = function () {
   // midi controller will send the status of every item on the
   // control surface. (Mixxx will be initialized with current values)
   midi.sendSysexMsg(ControllerStatusSysex, ControllerStatusSysex.length);
-  // midi.sendShortMsg(0x94, 00, 0x30);
+  midi.sendShortMsg(0x94, 0x00, 0x30);
 
   // loadedTrack(1, 75, [0x30, 0x4c], 0x94);
   // loadedTrack(2, 75, [0x30, 0x4c], 0x95);
@@ -218,4 +218,24 @@ TerminalMix8.wheelTurn = function (channel, control, value, status, group) {
   } else {
     engine.setValue(group, "jog", newValue); // Pitch bend
   }
+};
+
+// The wheel that actually controls the scratching
+TerminalMix8.pitchBend = function (channel, control, value, status, group) {
+  // --- Choose only one of the following!
+  // A: For a control that centers on 0:
+  //var newValue;
+  //if (value < 64) {
+  //    newValue = value;
+  //} else {
+  //    newValue = value - 128;
+  //}
+
+  // B: For a control that centers on 0x40 (64):
+  var newValue = value - 64;
+
+  // --- End choice
+
+  // In either case, register the movement
+  engine.setValue(group, "jog", newValue); // Pitch bend
 };
