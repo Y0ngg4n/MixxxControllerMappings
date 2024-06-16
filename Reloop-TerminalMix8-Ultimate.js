@@ -84,6 +84,15 @@ var initMethods = function () {
   syncListener(2, 0x91);
   syncListener(3, 0x92);
   syncListener(4, 0x93);
+  stutterListener(1, 0x90);
+  stutterListener(2, 0x91);
+  stutterListener(3, 0x92);
+  stutterListener(4, 0x93);
+  cueListener(1, 0x90);
+  cueListener(2, 0x91);
+  cueListener(3, 0x92);
+  cueListener(4, 0x93);
+
 };
 
 //  #####
@@ -108,19 +117,6 @@ var clearConnections = function () {
   }
 };
 
-var playingListener = function (channel, outChannel) {
-  connections[connections.length] = engine.makeConnection(
-    "[Channel" + channel + "]",
-    "play",
-    function (value, group, control) {
-      if (value == 1) {
-        midi.sendShortMsg(outChannel, 0x05, 0x7f);
-      } else {
-        midi.sendShortMsg(outChannel, 0x05, 0x00);
-      }
-    },
-  );
-};
 
 // #     #
 // ##   ## # #    # ###### #####
@@ -671,16 +667,6 @@ var playingListener = function (channel, outChannel) {
 };
 
 
-
- //  #####
- // #     # #   # #    #  ####
- // #        # #  ##   # #    #
- //  #####    #   # #  # #
- //       #   #   #  # # #
- // #     #   #   #   ## #    #
- //  #####    #   #    #  ####
-
-
 var syncListener = function (channel, outChannel) {
   connections[connections.length] = engine.makeConnection(
     "[Channel" + channel + "]",
@@ -696,7 +682,36 @@ var syncListener = function (channel, outChannel) {
 };
 
 
+var stutterListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "play_stutter",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x03, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x03, 0x00);
+      }
+    },
+  );
+};
 
+
+
+
+var cueListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "cue_default",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x04, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x04, 0x00);
+      }
+    },
+  );
+};
 // #                               #######
 // #        ####    ##   #####        #    #####    ##    ####  #    #      ##   #    # # #    #   ##   ##### #  ####  #    #
 // #       #    #  #  #  #    #       #    #    #  #  #  #    # #   #      #  #  ##   # # ##  ##  #  #    #   # #    # ##   #
