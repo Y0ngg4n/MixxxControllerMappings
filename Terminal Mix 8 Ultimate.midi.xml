@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MixxxControllerPreset mixxxVersion="" schemaVersion="1">
+  <info>
+    <name>Terminal Mix 8 Ultimate</name>
+  </info>
+  <controller id="">
+    <scriptfiles>
+      <file filename="lodash.mixxx.js" functionprefix=""/>
+      <file filename="midi-components-0.0.js" functionprefix=""/>
+      <file filename="Reloop-TerminalMix8-Ultimate.js" functionprefix="TerminalMix8"/>
+    </scriptfiles>
+    <controls>
+      <!-- #     #                         -->
+      <!-- ##   ## # #    # ###### #####   -->
+      <!-- # # # # #  #  #  #      #    #  -->
+      <!-- #  #  # #   ##   #####  #    #  -->
+      <!-- #     # #   ##   #      #####   -->
+      <!-- #     # #  #  #  #      #   #   -->
+      <!-- #     # # #    # ###### #    #  -->
+      <control>
+        <group>[Channel1]</group>
+        <key>volume</key>
+        <description>Gain</description>
+        <status>0xB0</status>
+        <midino>0x09</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel1]_Effect1]</group>
+        <key>parameter3</key>
+        <description>Equalizer: High</description>
+        <status>0xB0</status>
+        <midino>0x0A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel1]_Effect1]</group>
+        <key>parameter2</key>
+        <description>Equalizer: Mid</description>
+        <status>0xB0</status>
+        <midino>0x0B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel1]_Effect1]</group>
+        <key>parameter1</key>
+        <description>Equalizer: Low</description>
+        <status>0xB0</status>
+        <midino>0x0C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[QuickEffectRack1_[Channel1]]</group>
+        <key>super1</key>
+        <description>High/Low-Pass-Filter</description>
+        <status>0xB0</status>
+        <midino>0x0D</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+    </controls>
+    <outputs/>
+  </controller>
+</MixxxControllerPreset>
