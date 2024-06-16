@@ -80,6 +80,10 @@ var initMethods = function () {
   playingListener(2, 0x91);
   playingListener(3, 0x92);
   playingListener(4, 0x93);
+  syncListener(1, 0x90);
+  syncListener(2, 0x91);
+  syncListener(3, 0x92);
+  syncListener(4, 0x93);
 };
 
 //  #####
@@ -665,6 +669,32 @@ var playingListener = function (channel, outChannel) {
     },
   );
 };
+
+
+
+ //  #####
+ // #     # #   # #    #  ####
+ // #        # #  ##   # #    #
+ //  #####    #   # #  # #
+ //       #   #   #  # # #
+ // #     #   #   #   ## #    #
+ //  #####    #   #    #  ####
+
+
+var syncListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "sync_enabled",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x02, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x02, 0x00);
+      }
+    },
+  );
+};
+
 
 
 // #                               #######
