@@ -79,6 +79,7 @@
         </options>
       </control>
       <!-- End Pregain -->
+      <!-- Equalizer -->
       <control>
         <group>[EqualizerRack1_[Channel1]_Effect1]</group>
         <key>parameter3</key>
@@ -109,6 +110,97 @@
           <normal/>
         </options>
       </control>
+      <control>
+        <group>[EqualizerRack1_[Channel2]_Effect1]</group>
+        <key>parameter3</key>
+        <description>Equalizer: High</description>
+        <status>0xB1</status>
+        <midino>0x0A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel2]_Effect1]</group>
+        <key>parameter2</key>
+        <description>Equalizer: Mid</description>
+        <status>0xB1</status>
+        <midino>0x0B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel2]_Effect1]</group>
+        <key>parameter1</key>
+        <description>Equalizer: Low</description>
+        <status>0xB1</status>
+        <midino>0x0C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel3]_Effect1]</group>
+        <key>parameter3</key>
+        <description>Equalizer: High</description>
+        <status>0xB2</status>
+        <midino>0x0A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel3]_Effect1]</group>
+        <key>parameter2</key>
+        <description>Equalizer: Mid</description>
+        <status>0xB2</status>
+        <midino>0x0B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel3]_Effect1]</group>
+        <key>parameter1</key>
+        <description>Equalizer: Low</description>
+        <status>0xB2</status>
+        <midino>0x0C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel4]_Effect1]</group>
+        <key>parameter3</key>
+        <description>Equalizer: High</description>
+        <status>0xB3</status>
+        <midino>0x0A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel4]_Effect1]</group>
+        <key>parameter2</key>
+        <description>Equalizer: Mid</description>
+        <status>0xB3</status>
+        <midino>0x0B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[EqualizerRack1_[Channel4]_Effect1]</group>
+        <key>parameter1</key>
+        <description>Equalizer: Low</description>
+        <status>0xB3</status>
+        <midino>0x0C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Equalizer -->
       <!-- High/Low-Pass-Filter -->
       <control>
         <group>[QuickEffectRack1_[Channel1]]</group>
@@ -290,6 +382,36 @@
         <key>volume</key>
         <description>Volume Fader</description>
         <status>0xB0</status>
+        <midino>0x0F</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>volume</key>
+        <description>Volume Fader</description>
+        <status>0xB1</status>
+        <midino>0x0F</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>volume</key>
+        <description>Volume Fader</description>
+        <status>0xB2</status>
+        <midino>0x0F</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>volume</key>
+        <description>Volume Fader</description>
+        <status>0xB3</status>
         <midino>0x0F</midino>
         <options>
           <normal/>
