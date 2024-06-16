@@ -43,11 +43,11 @@ TerminalMix8.init = function () {
   midi.sendSysexMsg(ControllerStatusSysex, ControllerStatusSysex.length);
   midi.sendShortMsg(0x94, 0x00, 0x30);
 
-  // loadedTrack(1, 75, [0x30, 0x4c], 0x94);
-  // loadedTrack(2, 75, [0x30, 0x4c], 0x95);
-  // loadedTrack(3, 75, [0x30, 0x4c], 0x96);
-  // loadedTrack(4, 75, [0x30, 0x4c], 0x97);
-  // initMethods();
+  loadedTrack(1, 75, [0x30, 0x4c], 0x94);
+  loadedTrack(2, 75, [0x30, 0x4c], 0x95);
+  loadedTrack(3, 75, [0x30, 0x4c], 0x96);
+  loadedTrack(4, 75, [0x30, 0x4c], 0x97);
+  initMethods();
 };
 
 var initMethods = function () {
@@ -73,6 +73,7 @@ var initMethods = function () {
   deckTrackLoadedListener(3, 0x92);
   deckTrackLoadedListener(4, 0x93);
   fxEnabledListener(1, 0x90);
+  fxEnabledListener(2, 0x91);
   playingListener(1, 0x90);
   playingListener(2, 0x91);
   playingListener(3, 0x92);
@@ -98,12 +99,6 @@ TerminalMix8.shutdown = function () {
 var clearConnections = function () {
   for (var i = 0; i < connections.length; i++) {
     connections[i].disconnect();
-  }
-};
-
-var clearHotcues = function (channel) {
-  for (var i = 0; i <= 8 * 5; i++) {
-    midi.sendShortMsg(channel, i, 0x00);
   }
 };
 
@@ -238,4 +233,1469 @@ TerminalMix8.pitchBend = function (channel, control, value, status, group) {
 
   // In either case, register the movement
   engine.setValue(group, "jog", newValue); // Pitch bend
+};
+
+// #     #
+// #     #  ####  #####  ####  #    # ######  ####
+// #     # #    #   #   #    # #    # #      #
+// ####### #    #   #   #      #    # #####   ####
+// #     # #    #   #   #      #    # #           #
+// #     # #    #   #   #    # #    # #      #    #
+// #     #  ####    #    ####   ####  ######  ####
+
+var initHotcues = function (channel, outChannel) {
+  var hotcues = [];
+  for (var i = 1; i <= 8; i++) {
+    hotcues[i] = new components.HotcueButton({
+      number: i,
+      group: "[Channel" + channel + "]",
+      midi: [outChannel, 0x00 + i - 1],
+      colorMapper: colors,
+    });
+  }
+  var deleteHotcues = [];
+  for (var i = 1; i <= 8; i++) {
+    deleteHotcues[i] = new components.HotcueButton({
+      number: i,
+      group: "[Channel" + channel + "]",
+      midi: [outChannel, 0x20 + i - 1],
+      colorMapper: colors,
+    });
+  }
+};
+
+var clearHotcues = function (channel) {
+  for (var i = 0; i <= 8 * 5; i++) {
+    midi.sendShortMsg(channel, i, 0x00);
+  }
+};
+
+var updateHotcueColors = function (channelNumber, channel) {
+  for (var i = 0; i < 8; i++) {
+    if (
+      engine.getValue(
+        "[Channel" + channelNumber + "]",
+        "hotcue_" + (i + 1) + "_enabled",
+      )
+    )
+      setHotcueColor(channelNumber, channel, i, i + 1);
+    else clearHotcue(channel, i + 1);
+  }
+};
+
+var setHotcueColor = function (channel, outChannel, itemNumber, hotcueNumber) {
+  var hcColor = engine.getValue(
+    "[Channel" + channel + "]",
+    "hotcue_" + hotcueNumber + "_color",
+  );
+  var nearestColor = colors.getValueForNearestColor(hcColor);
+  midi.sendShortMsg(outChannel, itemNumber, nearestColor);
+};
+
+// ######
+// #     # ######   ##   ##### #       ####   ####  #####
+// #     # #       #  #    #   #      #    # #    # #    #
+// ######  #####  #    #   #   #      #    # #    # #    #
+// #     # #      ######   #   #      #    # #    # #####
+// #     # #      #    #   #   #      #    # #    # #
+// ######  ###### #    #   #   ######  ####   ####  #
+
+var beatloopListen = function (channel, outChannel) {
+  var enabledColor = 0x07;
+  var disabledColor = 0x00;
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "beatloop_0.5_enabled",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 8, enabledColor);
+      else midi.sendShortMsg(outChannel, 8, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "beatloop_1_enabled",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 9, enabledColor);
+      else midi.sendShortMsg(outChannel, 9, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "beatloop_2_enabled",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 10, enabledColor);
+      else midi.sendShortMsg(outChannel, 10, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "beatloop_4_enabled",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 11, enabledColor);
+      else midi.sendShortMsg(outChannel, 11, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "beatloop_8_enabled",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 12, enabledColor);
+      else midi.sendShortMsg(outChannel, 12, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "beatloop_16_enabled",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 13, enabledColor);
+      else midi.sendShortMsg(outChannel, 13, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "beatloop_32_enabled",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 14, enabledColor);
+      else midi.sendShortMsg(outChannel, 14, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "beatloop_64_enabled",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 15, enabledColor);
+      else midi.sendShortMsg(outChannel, 15, disabledColor);
+    },
+  );
+};
+
+var beatloopSizeListen = function (channel, outChannel) {
+  enabledColor = 0x03;
+  disabledColor = 0x00;
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "beatloop_size",
+    function (value, group, control) {
+      if (value == 0.5) {
+        for (var i = 0; i < 8; i++) {
+          if (i == 0) midi.sendShortMsg(outChannel, 8 + i, enabledColor);
+          else midi.sendShortMsg(outChannel, 8 + i, disabledColor);
+        }
+      }
+      if (value == 1) {
+        for (var i = 0; i < 8; i++) {
+          if (i == 1) midi.sendShortMsg(outChannel, 8 + i, enabledColor);
+          else midi.sendShortMsg(outChannel, 8 + i, disabledColor);
+        }
+      }
+      if (value == 2) {
+        for (var i = 0; i < 8; i++) {
+          if (i == 2) midi.sendShortMsg(outChannel, 8 + i, enabledColor);
+          else midi.sendShortMsg(outChannel, 8 + i, disabledColor);
+        }
+      }
+      if (value == 4) {
+        for (var i = 0; i < 8; i++) {
+          if (i == 3) midi.sendShortMsg(outChannel, 8 + i, enabledColor);
+          else midi.sendShortMsg(outChannel, 8 + i, disabledColor);
+        }
+      }
+      if (value == 8) {
+        for (var i = 0; i < 8; i++) {
+          if (i == 4) midi.sendShortMsg(outChannel, 8 + i, enabledColor);
+          else midi.sendShortMsg(outChannel, 8 + i, disabledColor);
+        }
+      }
+      if (value == 16) {
+        for (var i = 0; i < 8; i++) {
+          if (i == 5) midi.sendShortMsg(outChannel, 8 + i, enabledColor);
+          else midi.sendShortMsg(outChannel, 8 + i, disabledColor);
+        }
+      }
+      if (value == 32) {
+        for (var i = 0; i < 8; i++) {
+          if (i == 6) midi.sendShortMsg(outChannel, 8 + i, enabledColor);
+          else midi.sendShortMsg(outChannel, 8 + i, disabledColor);
+        }
+      }
+      if (value == 64) {
+        for (var i = 0; i < 8; i++) {
+          if (i == 7) midi.sendShortMsg(outChannel, 8 + i, enabledColor);
+          else midi.sendShortMsg(outChannel, 8 + i, disabledColor);
+        }
+      }
+    },
+  );
+};
+
+//  #####
+// #     #   ##   #    # #####  #      ###### #####
+// #        #  #  ##  ## #    # #      #      #    #
+//  #####  #    # # ## # #    # #      #####  #    #
+//       # ###### #    # #####  #      #      #####
+// #     # #    # #    # #      #      #      #   #
+//  #####  #    # #    # #      ###### ###### #    #
+
+var samplerListen = function (outChannel, samplerOffset) {
+  var enabledColor = 0x34;
+  var disabledColor = 0x00;
+  connections[connections.length] = engine.makeConnection(
+    "[Sampler" + (samplerOffset + 1) + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 16, enabledColor);
+      else midi.sendShortMsg(outChannel, 16, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Sampler" + (samplerOffset + 2) + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 17, enabledColor);
+      else midi.sendShortMsg(outChannel, 17, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Sampler" + (samplerOffset + 3) + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 18, enabledColor);
+      else midi.sendShortMsg(outChannel, 18, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Sampler" + (samplerOffset + 4) + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 19, enabledColor);
+      else midi.sendShortMsg(outChannel, 19, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Sampler" + (samplerOffset + 4 + 5) + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 20, enabledColor);
+      else midi.sendShortMsg(outChannel, 20, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Sampler" + (samplerOffset + 4 + 6) + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 21, enabledColor);
+      else midi.sendShortMsg(outChannel, 21, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Sampler" + (samplerOffset + 4 + 7) + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 22, enabledColor);
+      else midi.sendShortMsg(outChannel, 22, disabledColor);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Sampler" + (samplerOffset + 4 + 8) + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) midi.sendShortMsg(outChannel, 23, enabledColor);
+      else midi.sendShortMsg(outChannel, 23, disabledColor);
+    },
+  );
+};
+
+// #     #
+// #     # ######   ##   #####  #####  #    #  ####  #    # ######  ####
+// #     # #       #  #  #    # #    # #    # #    # ##   # #      #
+// ####### #####  #    # #    # #    # ###### #    # # #  # #####   ####
+// #     # #      ###### #    # #####  #    # #    # #  # # #           #
+// #     # #      #    # #    # #      #    # #    # #   ## #      #    #
+// #     # ###### #    # #####  #      #    #  ####  #    # ######  ####
+
+var headphonesListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "pfl",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x0e, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x0e, 0x00);
+      }
+    },
+  );
+};
+
+// #     # #     #    #     #
+// #     # #     #    ##   ## ###### ##### ###### #####
+// #     # #     #    # # # # #        #   #      #    #
+// #     # #     #    #  #  # #####    #   #####  #    #
+//  #   #  #     #    #     # #        #   #      #####
+//   # #   #     #    #     # #        #   #      #   #
+//    #     #####     #     # ######   #   ###### #    #
+
+var vuMeterListener = function (outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + 1 + "]",
+    "VuMeter",
+    function (value, group, control) {
+      midi.sendShortMsg(0xb0, 1, value * 10);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + 2 + "]",
+    "VuMeter",
+    function (value, group, control) {
+      midi.sendShortMsg(0xb1, 1, value * 10);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + 3 + "]",
+    "VuMeter",
+    function (value, group, control) {
+      midi.sendShortMsg(0xb2, 1, value * 10);
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + 4 + "]",
+    "VuMeter",
+    function (value, group, control) {
+      midi.sendShortMsg(0xb3, 1, value * 10);
+    },
+  );
+};
+
+//  #######
+//  #       ###### ###### ######  ####  #####  ####
+//  #       #      #      #      #    #   #   #
+//  #####   #####  #####  #####  #        #    ####
+//  #       #      #      #      #        #        #
+//  #       #      #      #      #    #   #   #    #
+//  ####### #      #      ######  ####    #    ####
+
+var fxEnabledListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[EffectRack1_EffectUnit" + channel + "_Effect1]",
+    "enabled",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x1a, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x1a, 0x00);
+      }
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[EffectRack1_EffectUnit" + channel + "_Effect2]",
+    "enabled",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x1b, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x1b, 0x00);
+      }
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[EffectRack1_EffectUnit" + channel+"_Effect3]",
+    "enabled",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x1c, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x1c, 0x00);
+      }
+    },
+  );
+};
+
+
+
+
+
+//  ######
+//  #     # #        ##   #   # # #    #  ####
+//  #     # #       #  #   # #  # ##   # #    #
+//  ######  #      #    #   #   # # #  # #
+//  #       #      ######   #   # #  # # #  ###
+//  #       #      #    #   #   # #   ## #    #
+//  #       ###### #    #   #   # #    #  ####
+
+var playingListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x05, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x05, 0x00);
+      }
+    },
+  );
+};
+
+
+// #                               #######
+// #        ####    ##   #####        #    #####    ##    ####  #    #      ##   #    # # #    #   ##   ##### #  ####  #    #
+// #       #    #  #  #  #    #       #    #    #  #  #  #    # #   #      #  #  ##   # # ##  ##  #  #    #   # #    # ##   #
+// #       #    # #    # #    #       #    #    # #    # #      ####      #    # # #  # # # ## # #    #   #   # #    # # #  #
+// #       #    # ###### #    #       #    #####  ###### #      #  #      ###### #  # # # #    # ######   #   # #    # #  # #
+// #       #    # #    # #    #       #    #   #  #    # #    # #   #     #    # #   ## # #    # #    #   #   # #    # #   ##
+// #######  ####  #    # #####        #    #    # #    #  ####  #    #    #    # #    # # #    # #    #   #   #  ####  #    #
+
+var deckTrackLoadedListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "track_loaded",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x10, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x10, 0x00);
+      }
+    },
+  );
+};
+
+var loadedTrack = function (channelNumber, delay, colors, channel) {
+  loadedConnection = engine.makeConnection(
+    "[Channel" + channelNumber + "]",
+    "track_loaded",
+    function (value, group, control) {
+      clearHotcues(channel);
+      clearConnections();
+      // First color
+      // Hotcue
+      engine.beginTimer(
+        delay,
+        function () {
+          midi.sendShortMsg(channel, 0, colors[0]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8, colors[0]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 2, colors[0]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 3, colors[0]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 4, colors[0]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 5, colors[0]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 6, colors[0]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 7, colors[0]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 2,
+        function () {
+          midi.sendShortMsg(channel, 1, colors[0]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 2,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8, colors[0]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 2,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 2, colors[0]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 2,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 3, colors[0]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 2,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 4, colors[0]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 2,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 5, colors[0]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 2,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 6, colors[0]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 2,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 7, colors[0]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 3,
+        function () {
+          midi.sendShortMsg(channel, 2, colors[0]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 3,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8, colors[0]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 3,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 2, colors[0]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 3,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 3, colors[0]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 3,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 4, colors[0]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 3,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 5, colors[0]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 3,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 6, colors[0]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 3,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 7, colors[0]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 4,
+        function () {
+          midi.sendShortMsg(channel, 3, colors[0]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 4,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8, colors[0]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 4,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 2, colors[0]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 4,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 3, colors[0]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 4,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 4, colors[0]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 4,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 5, colors[0]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 4,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 6, colors[0]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 4,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 7, colors[0]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 5,
+        function () {
+          midi.sendShortMsg(channel, 4, colors[0]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 5,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8, colors[0]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 5,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 2, colors[0]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 5,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 3, colors[0]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 5,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 4, colors[0]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 5,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 5, colors[0]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 5,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 6, colors[0]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 5,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 7, colors[0]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 6,
+        function () {
+          midi.sendShortMsg(channel, 5, colors[0]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 6,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8, colors[0]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 6,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 2, colors[0]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 6,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 3, colors[0]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 6,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 4, colors[0]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 6,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 5, colors[0]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 6,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 6, colors[0]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 6,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 7, colors[0]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 7,
+        function () {
+          midi.sendShortMsg(channel, 6, colors[0]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 7,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8, colors[0]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 7,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 2, colors[0]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 7,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 3, colors[0]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 7,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 4, colors[0]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 7,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 5, colors[0]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 7,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 6, colors[0]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 7,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 7, colors[0]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 8,
+        function () {
+          midi.sendShortMsg(channel, 7, colors[0]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 8,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8, colors[0]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 8,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 2, colors[0]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 8,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 3, colors[0]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 8,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 4, colors[0]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 8,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 5, colors[0]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 8,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 6, colors[0]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 8,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 7, colors[0]);
+        },
+        true,
+      );
+
+      // Second color
+      // Hotcue
+      engine.beginTimer(
+        delay * 9,
+        function () {
+          midi.sendShortMsg(channel, 0, colors[1]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 9,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8, colors[1]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 9,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 2, colors[1]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 9,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 3, colors[1]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 9,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 4, colors[1]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 9,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 5, colors[1]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 9,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 6, colors[1]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 9,
+        function () {
+          midi.sendShortMsg(channel, 0 + 8 * 7, colors[1]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 10,
+        function () {
+          midi.sendShortMsg(channel, 1, colors[1]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 10,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8, colors[1]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 10,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 2, colors[1]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 10,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 3, colors[1]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 10,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 4, colors[1]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 10,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 5, colors[1]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 10,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 6, colors[1]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 10,
+        function () {
+          midi.sendShortMsg(channel, 1 + 8 * 7, colors[1]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 11,
+        function () {
+          midi.sendShortMsg(channel, 2, colors[1]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 11,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8, colors[1]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 11,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 2, colors[1]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 11,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 3, colors[1]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 11,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 4, colors[1]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 11,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 5, colors[1]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 11,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 6, colors[1]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 11,
+        function () {
+          midi.sendShortMsg(channel, 2 + 8 * 7, colors[1]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 12,
+        function () {
+          midi.sendShortMsg(channel, 3, colors[1]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 12,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8, colors[1]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 12,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 2, colors[1]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 12,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 3, colors[1]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 12,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 4, colors[1]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 12,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 5, colors[1]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 12,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 6, colors[1]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 12,
+        function () {
+          midi.sendShortMsg(channel, 3 + 8 * 7, colors[1]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 13,
+        function () {
+          midi.sendShortMsg(channel, 4, colors[1]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 13,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8, colors[1]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 13,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 2, colors[1]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 13,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 3, colors[1]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 13,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 4, colors[1]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 13,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 5, colors[1]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 13,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 6, colors[1]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 13,
+        function () {
+          midi.sendShortMsg(channel, 4 + 8 * 7, colors[1]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 14,
+        function () {
+          midi.sendShortMsg(channel, 5, colors[1]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 14,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8, colors[1]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 14,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 2, colors[1]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 14,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 3, colors[1]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 14,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 4, colors[1]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 14,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 5, colors[1]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 14,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 6, colors[1]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 14,
+        function () {
+          midi.sendShortMsg(channel, 5 + 8 * 7, colors[1]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 15,
+        function () {
+          midi.sendShortMsg(channel, 6, colors[1]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 15,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8, colors[1]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 15,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 2, colors[1]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 15,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 3, colors[1]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 15,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 4, colors[1]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 15,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 5, colors[1]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 15,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 6, colors[1]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 15,
+        function () {
+          midi.sendShortMsg(channel, 6 + 8 * 7, colors[1]);
+        },
+        true,
+      );
+
+      engine.beginTimer(
+        delay * 16,
+        function () {
+          midi.sendShortMsg(channel, 7, colors[1]);
+        },
+        true,
+      );
+      // Loop
+      engine.beginTimer(
+        delay * 16,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8, colors[1]);
+        },
+        true,
+      );
+      // Sampler
+      engine.beginTimer(
+        delay * 16,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 2, colors[1]);
+        },
+        true,
+      );
+      // Slice
+      engine.beginTimer(
+        delay * 16,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 3, colors[1]);
+        },
+        true,
+      );
+      // Mode1
+      engine.beginTimer(
+        delay * 16,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 4, colors[1]);
+        },
+        true,
+      );
+      // Mode2
+      engine.beginTimer(
+        delay * 16,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 5, colors[1]);
+        },
+        true,
+      );
+      // Mode3
+      engine.beginTimer(
+        delay * 16,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 6, colors[1]);
+        },
+        true,
+      );
+      // Mode4
+      engine.beginTimer(
+        delay * 16,
+        function () {
+          midi.sendShortMsg(channel, 7 + 8 * 7, colors[1]);
+          clearHotcues(channel);
+          initMethods();
+          updateHotcueColors(channelNumber, channel);
+        },
+        true,
+      );
+    },
+  );
 };

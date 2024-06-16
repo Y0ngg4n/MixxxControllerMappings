@@ -1107,6 +1107,676 @@
         </options>
       </control>
       <!-- End Play -->
+      <!-- #     #                                         #                                            #                       -->
+      <!-- #     #  ####  #####  ####  #    # ######      # #   #####  #####      ####  #####           # #    # #    # #####   -->
+      <!-- #     # #    #   #   #    # #    # #          #   #  #    # #    #    #    # #    #          # #    # ##  ## #    #  -->
+      <!-- ####### #    #   #   #      #    # #####     #     # #    # #    #    #    # #    #          # #    # # ## # #    #  -->
+      <!-- #     # #    #   #   #      #    # #         ####### #    # #    #    #    # #####     #     # #    # #    # #####   -->
+      <!-- #     # #    #   #   #    # #    # #         #     # #    # #    #    #    # #   #     #     # #    # #    # #       -->
+      <!-- #     #  ####    #    ####   ####  ######    #     # #####  #####      ####  #    #     #####   ####  #    # #       -->
+      <!-- Hotcue Channel 1 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_1_activate</key>
+        <description>Hotcue 1</description>
+        <status>0x94</status>
+        <midino>0x00</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_2_activate</key>
+        <description>Hotcue 2</description>
+        <status>0x94</status>
+        <midino>0x01</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_3_activate</key>
+        <description>Hotcue 3</description>
+        <status>0x94</status>
+        <midino>0x02</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_4_activate</key>
+        <description>Hotcue 4</description>
+        <status>0x94</status>
+        <midino>0x03</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_5_activate</key>
+        <description>Hotcue 5</description>
+        <status>0x94</status>
+        <midino>0x04</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_6_activate</key>
+        <description>Hotcue 6</description>
+        <status>0x94</status>
+        <midino>0x05</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_7_activate</key>
+        <description>Hotcue 7</description>
+        <status>0x94</status>
+        <midino>0x06</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_8_activate</key>
+        <description>Hotcue 8</description>
+        <status>0x94</status>
+        <midino>0x07</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Hotcue Channel 1 -->
+      <!-- Hotcue Channel 2 -->
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_1_activate</key>
+        <description>Hotcue 1</description>
+        <status>0x95</status>
+        <midino>0x00</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_2_activate</key>
+        <description>Hotcue 2</description>
+        <status>0x95</status>
+        <midino>0x01</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_3_activate</key>
+        <description>Hotcue 3</description>
+        <status>0x95</status>
+        <midino>0x02</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_4_activate</key>
+        <description>Hotcue 4</description>
+        <status>0x95</status>
+        <midino>0x03</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_5_activate</key>
+        <description>Hotcue 5</description>
+        <status>0x95</status>
+        <midino>0x04</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_6_activate</key>
+        <description>Hotcue 6</description>
+        <status>0x95</status>
+        <midino>0x05</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_7_activate</key>
+        <description>Hotcue 7</description>
+        <status>0x95</status>
+        <midino>0x06</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_8_activate</key>
+        <description>Hotcue 8</description>
+        <status>0x95</status>
+        <midino>0x07</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Hotcue Channel 2 -->
+      <!-- Hotcue Channel 3 -->
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_1_activate</key>
+        <description>Hotcue 1</description>
+        <status>0x96</status>
+        <midino>0x00</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_2_activate</key>
+        <description>Hotcue 2</description>
+        <status>0x96</status>
+        <midino>0x01</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_3_activate</key>
+        <description>Hotcue 3</description>
+        <status>0x96</status>
+        <midino>0x02</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_4_activate</key>
+        <description>Hotcue 4</description>
+        <status>0x96</status>
+        <midino>0x03</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_5_activate</key>
+        <description>Hotcue 5</description>
+        <status>0x96</status>
+        <midino>0x04</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_6_activate</key>
+        <description>Hotcue 6</description>
+        <status>0x96</status>
+        <midino>0x05</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_7_activate</key>
+        <description>Hotcue 7</description>
+        <status>0x96</status>
+        <midino>0x06</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_8_activate</key>
+        <description>Hotcue 8</description>
+        <status>0x96</status>
+        <midino>0x07</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Hotcue Channel 3 -->
+      <!-- Hotcue Channel 4 -->
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_1_activate</key>
+        <description>Hotcue 1</description>
+        <status>0x97</status>
+        <midino>0x00</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_2_activate</key>
+        <description>Hotcue 2</description>
+        <status>0x97</status>
+        <midino>0x01</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_3_activate</key>
+        <description>Hotcue 3</description>
+        <status>0x97</status>
+        <midino>0x02</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_4_activate</key>
+        <description>Hotcue 4</description>
+        <status>0x97</status>
+        <midino>0x03</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_5_activate</key>
+        <description>Hotcue 5</description>
+        <status>0x97</status>
+        <midino>0x04</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_6_activate</key>
+        <description>Hotcue 6</description>
+        <status>0x97</status>
+        <midino>0x05</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_7_activate</key>
+        <description>Hotcue 7</description>
+        <status>0x97</status>
+        <midino>0x06</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_8_activate</key>
+        <description>Hotcue 8</description>
+        <status>0x97</status>
+        <midino>0x07</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Hotcue Channel 4 -->
+      <!-- #     #                                                                          -->
+      <!-- #     #  ####  #####  ####  #    # ######     ####  #      ######   ##   #####   -->
+      <!-- #     # #    #   #   #    # #    # #         #    # #      #       #  #  #    #  -->
+      <!-- ####### #    #   #   #      #    # #####     #      #      #####  #    # #    #  -->
+      <!-- #     # #    #   #   #      #    # #         #      #      #      ###### #####   -->
+      <!-- #     # #    #   #   #    # #    # #         #    # #      #      #    # #   #   -->
+      <!-- #     #  ####    #    ####   ####  ######     ####  ###### ###### #    # #    #  -->
+      <!-- Hotcue Channel 1 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_1_clear</key>
+        <description>Hotcue 1 clear</description>
+        <status>0x94</status>
+        <midino>0x20</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_2_clear</key>
+        <description>Hotcue 2 clear</description>
+        <status>0x94</status>
+        <midino>0x21</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_3_clear</key>
+        <description>Hotcue 3 clear</description>
+        <status>0x94</status>
+        <midino>0x22</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_4_clear</key>
+        <description>Hotcue 4 clear</description>
+        <status>0x94</status>
+        <midino>0x23</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_5_clear</key>
+        <description>Hotcue 5 clear</description>
+        <status>0x94</status>
+        <midino>0x24</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_6_clear</key>
+        <description>Hotcue 6 clear</description>
+        <status>0x94</status>
+        <midino>0x25</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_7_clear</key>
+        <description>Hotcue 7 clear</description>
+        <status>0x94</status>
+        <midino>0x26</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>hotcue_8_clear</key>
+        <description>Hotcue 8 clear</description>
+        <status>0x94</status>
+        <midino>0x27</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Hotcue Channel 1 -->
+      <!-- Hotcue Channel 2 -->
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_1_clear</key>
+        <description>Hotcue 1 clear</description>
+        <status>0x95</status>
+        <midino>0x20</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_2_clear</key>
+        <description>Hotcue 2 clear</description>
+        <status>0x95</status>
+        <midino>0x21</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_3_clear</key>
+        <description>Hotcue 3 clear</description>
+        <status>0x95</status>
+        <midino>0x22</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_4_clear</key>
+        <description>Hotcue 4 clear</description>
+        <status>0x95</status>
+        <midino>0x23</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_5_clear</key>
+        <description>Hotcue 5 clear</description>
+        <status>0x95</status>
+        <midino>0x24</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_6_clear</key>
+        <description>Hotcue 6 clear</description>
+        <status>0x95</status>
+        <midino>0x25</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_7_clear</key>
+        <description>Hotcue 7 clear</description>
+        <status>0x95</status>
+        <midino>0x26</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>hotcue_8_clear</key>
+        <description>Hotcue 8 clear</description>
+        <status>0x95</status>
+        <midino>0x27</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Hotcue Channel 2 -->
+      <!-- Hotcue Channel 3 -->
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_1_clear</key>
+        <description>Hotcue 1 clear</description>
+        <status>0x96</status>
+        <midino>0x20</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_2_clear</key>
+        <description>Hotcue 2 clear</description>
+        <status>0x96</status>
+        <midino>0x21</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_3_clear</key>
+        <description>Hotcue 3 clear</description>
+        <status>0x96</status>
+        <midino>0x22</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_4_clear</key>
+        <description>Hotcue 4 clear</description>
+        <status>0x96</status>
+        <midino>0x23</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_5_clear</key>
+        <description>Hotcue 5 clear</description>
+        <status>0x96</status>
+        <midino>0x24</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_6_clear</key>
+        <description>Hotcue 6 clear</description>
+        <status>0x96</status>
+        <midino>0x25</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_7_clear</key>
+        <description>Hotcue 7 clear</description>
+        <status>0x96</status>
+        <midino>0x26</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>hotcue_8_clear</key>
+        <description>Hotcue 8 clear</description>
+        <status>0x96</status>
+        <midino>0x27</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Hotcue Channel 3 -->
+      <!-- Hotcue Channel 4 -->
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_1_clear</key>
+        <description>Hotcue 1 clear</description>
+        <status>0x97</status>
+        <midino>0x20</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_2_clear</key>
+        <description>Hotcue 2 clear</description>
+        <status>0x97</status>
+        <midino>0x21</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_3_clear</key>
+        <description>Hotcue 3 clear</description>
+        <status>0x97</status>
+        <midino>0x22</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_4_clear</key>
+        <description>Hotcue 4 clear</description>
+        <status>0x97</status>
+        <midino>0x23</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_5_clear</key>
+        <description>Hotcue 5 clear</description>
+        <status>0x97</status>
+        <midino>0x24</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_6_clear</key>
+        <description>Hotcue 6 clear</description>
+        <status>0x97</status>
+        <midino>0x25</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_7_clear</key>
+        <description>Hotcue 7 clear</description>
+        <status>0x97</status>
+        <midino>0x26</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>hotcue_8_clear</key>
+        <description>Hotcue 8 clear</description>
+        <status>0x97</status>
+        <midino>0x27</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Hotcue Channel 4 -->
     </controls>
     <outputs/>
   </controller>
