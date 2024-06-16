@@ -18,6 +18,26 @@
       <!-- #     # #  #  #  #      #   #   -->
       <!-- #     # # #    # ###### #    #  -->
       <control>
+        <group>[Master]</group>
+        <key>headMix</key>
+        <description>Cue Mix</description>
+        <status>0xB0</status>
+        <midino>0x29</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>TerminalMix8.allSamplerGain</key>
+        <description>PreGain for the Sampler</description>
+        <status>0xB0</status>
+        <midino>0x2A</midino>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
+      <control>
         <group>[Channel1]</group>
         <key>volume</key>
         <description>Gain</description>
@@ -63,6 +83,61 @@
         <description>High/Low-Pass-Filter</description>
         <status>0xB0</status>
         <midino>0x0D</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- #                                            -->
+      <!-- #       # #####  #####    ##   #####  #   #  -->
+      <!-- #       # #    # #    #  #  #  #    #  # #   -->
+      <!-- #       # #####  #    # #    # #    #   #    -->
+      <!-- #       # #    # #####  ###### #####    #    -->
+      <!-- #       # #    # #   #  #    # #   #    #    -->
+      <!-- ####### # #####  #    # #    # #    #   #    -->
+      <control>
+        <group>[Channel1]</group>
+        <key>LoadSelectedTrack</key>
+        <description>Load Track</description>
+        <status>0x90</status>
+        <midino>0x10</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Library]</group>
+        <key>ScrollVertical</key>
+        <description>Scroll through Library</description>
+        <status>0xB0</status>
+        <midino>0x28</midino>
+        <options>
+          <spread64/>
+          <selectknob/>
+        </options>
+      </control>
+      <control>
+        <group>[Library]</group>
+        <key>MoveFocus</key>
+        <description>Switch focus between Library panes</description>
+        <status>0x90</status>
+        <midino>0x28</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- #     #                                                                 -->
+      <!-- #     # ######   ##   #####  #####  #    #  ####  #    # ######  ####   -->
+      <!-- #     # #       #  #  #    # #    # #    # #    # ##   # #      #       -->
+      <!-- ####### #####  #    # #    # #    # ###### #    # # #  # #####   ####   -->
+      <!-- #     # #      ###### #    # #####  #    # #    # #  # # #           #  -->
+      <!-- #     # #      #    # #    # #      #    # #    # #   ## #      #    #  -->
+      <!-- #     # ###### #    # #####  #      #    #  ####  #    # ######  ####   -->
+      <control>
+        <group>[Channel1]</group>
+        <key>pfl</key>
+        <description>Pre-Listen with Headphones</description>
+        <status>0x90</status>
+        <midino>0x10</midino>
         <options>
           <normal/>
         </options>
