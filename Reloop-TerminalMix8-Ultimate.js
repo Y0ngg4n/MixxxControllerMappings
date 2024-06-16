@@ -73,6 +73,8 @@ var initMethods = function () {
   deckTrackLoadedListener(3, 0x92);
   deckTrackLoadedListener(4, 0x93);
   fxEnabledListener(1, 0x90);
+  fxAssignedListener(2, 0x91);
+  fxAssignedListener(1, 0x90);
   fxEnabledListener(2, 0x91);
   playingListener(1, 0x90);
   playingListener(2, 0x91);
@@ -269,6 +271,10 @@ var clearHotcues = function (channel) {
     midi.sendShortMsg(channel, i, 0x00);
   }
 };
+var clearHotcue = function (outChannel, itemNumber) {
+  midi.sendShortMsg(outChannel, itemNumber, 0x00);
+};
+
 
 var updateHotcueColors = function (channelNumber, channel) {
   for (var i = 0; i < 8; i++) {
@@ -605,6 +611,30 @@ var fxEnabledListener = function (channel, outChannel) {
         midi.sendShortMsg(outChannel, 0x1c, 0x7f);
       } else {
         midi.sendShortMsg(outChannel, 0x1c, 0x00);
+      }
+    },
+  );
+};
+var fxAssignedListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[EffectRack1_EffectUnit1]",
+    "group_[Channel" + channel + "]_enable",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x18, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x18, 0x00);
+      }
+    },
+  );
+  connections[connections.length] = engine.makeConnection(
+    "[EffectRack1_EffectUnit2]",
+    "group_[Channel" + channel + "]_enable",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x19, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x19, 0x00);
       }
     },
   );
