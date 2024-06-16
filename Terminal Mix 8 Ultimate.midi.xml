@@ -37,16 +37,48 @@
           <script-binding/>
         </options>
       </control>
+      <!-- Pregain -->
       <control>
         <group>[Channel1]</group>
-        <key>volume</key>
-        <description>Gain</description>
+        <key>pregain</key>
+        <description>Pregain</description>
         <status>0xB0</status>
         <midino>0x09</midino>
         <options>
           <normal/>
         </options>
       </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>pregain</key>
+        <description>Pregain</description>
+        <status>0xB1</status>
+        <midino>0x09</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>pregain</key>
+        <description>Pregain</description>
+        <status>0xB2</status>
+        <midino>0x09</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>pregain</key>
+        <description>Pregain</description>
+        <status>0xB3</status>
+        <midino>0x09</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Pregain -->
       <control>
         <group>[EqualizerRack1_[Channel1]_Effect1]</group>
         <key>parameter3</key>
@@ -77,6 +109,7 @@
           <normal/>
         </options>
       </control>
+      <!-- High/Low-Pass-Filter -->
       <control>
         <group>[QuickEffectRack1_[Channel1]]</group>
         <key>super1</key>
@@ -87,6 +120,37 @@
           <normal/>
         </options>
       </control>
+      <control>
+        <group>[QuickEffectRack1_[Channel2]]</group>
+        <key>super1</key>
+        <description>High/Low-Pass-Filter</description>
+        <status>0xB1</status>
+        <midino>0x0D</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[QuickEffectRack1_[Channel3]]</group>
+        <key>super1</key>
+        <description>High/Low-Pass-Filter</description>
+        <status>0xB2</status>
+        <midino>0x0D</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[QuickEffectRack1_[Channel4]]</group>
+        <key>super1</key>
+        <description>High/Low-Pass-Filter</description>
+        <status>0xB3</status>
+        <midino>0x0D</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End High/Low-Pass-Filter -->
       <!-- #                                            -->
       <!-- #       # #####  #####    ##   #####  #   #  -->
       <!-- #       # #    # #    #  #  #  #    #  # #   -->
@@ -125,6 +189,46 @@
           <normal/>
         </options>
       </control>
+      <control>
+        <group>[Skin]</group>
+        <key>show_maximized_library</key>
+        <description>Toggle Big Library</description>
+        <status>0x90</status>
+        <midino>0x24</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Skin]</group>
+        <key>show_mixer</key>
+        <description>Toggle Mixer</description>
+        <status>0x90</status>
+        <midino>0x25</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel1]</group>
+        <key>TerminalMix8.preview</key>
+        <description>Preview toggle</description>
+        <status>0x90</status>
+        <midino>0x27</midino>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
+      <control>
+        <group>[Library]</group>
+        <key>MoveFocusBackward</key>
+        <description>Move Back in Library</description>
+        <status>0x90</status>
+        <midino>0x26</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
       <!-- #     #                                                                 -->
       <!-- #     # ######   ##   #####  #####  #    #  ####  #    # ######  ####   -->
       <!-- #     # #       #  #  #    # #    # #    # #    # ##   # #      #       -->
@@ -138,6 +242,33 @@
         <description>Pre-Listen with Headphones</description>
         <status>0x90</status>
         <midino>0x10</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- #######                              -->
+      <!-- #         ##   #####  ###### #####   -->
+      <!-- #        #  #  #    # #      #    #  -->
+      <!-- #####   #    # #    # #####  #    #  -->
+      <!-- #       ###### #    # #      #####   -->
+      <!-- #       #    # #    # #      #   #   -->
+      <!-- #       #    # #####  ###### #    #  -->
+      <control>
+        <group>[Channel1]</group>
+        <key>volume</key>
+        <description>Volume Fader</description>
+        <status>0xB0</status>
+        <midino>0x0F</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Master]</group>
+        <key>crossfader</key>
+        <description>Crossfader</description>
+        <status>0xB0</status>
+        <midino>0x2B</midino>
         <options>
           <normal/>
         </options>

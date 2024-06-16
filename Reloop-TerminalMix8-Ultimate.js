@@ -119,3 +119,42 @@ var playingListener = function (channel, outChannel) {
     },
   );
 };
+
+// #     #
+// ##   ## # #    # ###### #####
+// # # # # #  #  #  #      #    #
+// #  #  # #   ##   #####  #    #
+// #     # #   ##   #      #####
+// #     # #  #  #  #      #   #
+// #     # # #    # ###### #    #
+
+TerminalMix8.allSamplerGain = function (
+  channel,
+  control,
+  value,
+  status,
+  group,
+) {
+  for (var i = 0; i < 16; i++) {
+    // TODO: Check what curve the Sampler Volume is using. Maybe logarithmic?
+    engine.setValue("[Sampler" + i + "]", "pregain", value / 35);
+  }
+};
+
+// #
+// #       # #####  #####    ##   #####  #   #
+// #       # #    # #    #  #  #  #    #  # #
+// #       # #####  #    # #    # #    #   #
+// #       # #    # #####  ###### #####    #
+// #       # #    # #   #  #    # #   #    #
+// ####### # #####  #    # #    # #    #   #
+
+TerminalMix8.preview = function (channel, control, value, status, group) {
+  if (value != 0) {
+    if (engine.getValue("[PreviewDeck1]", "play") != 1) {
+      engine.setValue("[PreviewDeck1]", "LoadSelectedTrackAndPlay", 1);
+    } else {
+      engine.setValue("[PreviewDeck1]", "play", 0);
+    }
+  }
+};
