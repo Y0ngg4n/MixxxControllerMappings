@@ -1807,6 +1807,349 @@
         </options>
       </control>
       <!-- End Hotcue Channel 4 -->
+      <!-- #                                    -->
+      <!-- #        ####   ####  #####   ####   -->
+      <!-- #       #    # #    # #    # #       -->
+      <!-- #       #    # #    # #    #  ####   -->
+      <!-- #       #    # #    # #####       #  -->
+      <!-- #       #    # #    # #      #    #  -->
+      <!-- #######  ####   ####  #       ####   -->
+      <!-- Beatloop 0.5 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>beatloop_0.5_toggle</key>
+        <description>Beatloop 0.5 toggle</description>
+        <status>0x94</status>
+        <midino>0x08</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>beatloop_0.5_toggle</key>
+        <description>Beatloop 0.5 toggle</description>
+        <status>0x95</status>
+        <midino>0x08</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>beatloop_0.5_toggle</key>
+        <description>Beatloop 0.5 toggle</description>
+        <status>0x96</status>
+        <midino>0x08</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>beatloop_0.5_toggle</key>
+        <description>Beatloop 0.5 toggle</description>
+        <status>0x97</status>
+        <midino>0x08</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Beatloop 0.5 -->
+      <!-- Beatloop 1 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>beatloop_1_toggle</key>
+        <description>Beatloop 1 toggle</description>
+        <status>0x94</status>
+        <midino>0x09</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>beatloop_1_toggle</key>
+        <description>Beatloop 1 toggle</description>
+        <status>0x95</status>
+        <midino>0x09</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>beatloop_1_toggle</key>
+        <description>Beatloop 1 toggle</description>
+        <status>0x96</status>
+        <midino>0x09</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>beatloop_1_toggle</key>
+        <description>Beatloop 1 toggle</description>
+        <status>0x97</status>
+        <midino>0x09</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Beatloop 1 -->
+      <!-- Beatloop 2 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>beatloop_2_toggle</key>
+        <description>Beatloop 2 toggle</description>
+        <status>0x94</status>
+        <midino>0x0A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>beatloop_2_toggle</key>
+        <description>Beatloop 2 toggle</description>
+        <status>0x95</status>
+        <midino>0x0A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>beatloop_2_toggle</key>
+        <description>Beatloop 2 toggle</description>
+        <status>0x96</status>
+        <midino>0x0A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>beatloop_2_toggle</key>
+        <description>Beatloop 2 toggle</description>
+        <status>0x97</status>
+        <midino>0x0A</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Beatloop 2 -->
+      <!-- Beatloop 4 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>beatloop_4_toggle</key>
+        <description>Beatloop 4 toggle</description>
+        <status>0x94</status>
+        <midino>0x0B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>beatloop_4_toggle</key>
+        <description>Beatloop 4 toggle</description>
+        <status>0x95</status>
+        <midino>0x0B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>beatloop_4_toggle</key>
+        <description>Beatloop 4 toggle</description>
+        <status>0x96</status>
+        <midino>0x0B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>beatloop_4_toggle</key>
+        <description>Beatloop 4 toggle</description>
+        <status>0x97</status>
+        <midino>0x0B</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Beatloop 4 -->
+      <!-- Beatloop 8 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>beatloop_8_toggle</key>
+        <description>Beatloop 8</description>
+        <status>0x94</status>
+        <midino>0x0C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>beatloop_8_toggle</key>
+        <description>Beatloop 8</description>
+        <status>0x95</status>
+        <midino>0x0C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>beatloop_8_toggle</key>
+        <description>Beatloop 8</description>
+        <status>0x96</status>
+        <midino>0x0C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>beatloop_8_toggle</key>
+        <description>Beatloop 8</description>
+        <status>0x97</status>
+        <midino>0x0C</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Beatloop 8 -->
+      <!-- Beatloop 16 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>beatloop_16_toggle</key>
+        <description>Beatloop 16</description>
+        <status>0x94</status>
+        <midino>0x0D</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>beatloop_16_toggle</key>
+        <description>Beatloop 16</description>
+        <status>0x95</status>
+        <midino>0x0D</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>beatloop_16_toggle</key>
+        <description>Beatloop 16</description>
+        <status>0x96</status>
+        <midino>0x0D</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>beatloop_16_toggle</key>
+        <description>Beatloop 16</description>
+        <status>0x97</status>
+        <midino>0x0D</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Beatloop 16 -->
+      <!-- Beatloop 32 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>beatloop_32_toggle</key>
+        <description>Beatloop 32</description>
+        <status>0x94</status>
+        <midino>0x0E</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>beatloop_32_toggle</key>
+        <description>Beatloop 32</description>
+        <status>0x95</status>
+        <midino>0x0E</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>beatloop_32_toggle</key>
+        <description>Beatloop 32</description>
+        <status>0x96</status>
+        <midino>0x0E</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>beatloop_32_toggle</key>
+        <description>Beatloop 32</description>
+        <status>0x97</status>
+        <midino>0x0E</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Beatloop 32 -->
+      <!-- Beatloop 64 -->
+      <control>
+        <group>[Channel1]</group>
+        <key>beatloop_64_toggle</key>
+        <description>Beatloop 64</description>
+        <status>0x94</status>
+        <midino>0x0F</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel2]</group>
+        <key>beatloop_64_toggle</key>
+        <description>Beatloop 64</description>
+        <status>0x95</status>
+        <midino>0x0F</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel3]</group>
+        <key>beatloop_64_toggle</key>
+        <description>Beatloop 64</description>
+        <status>0x96</status>
+        <midino>0x0F</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Channel4]</group>
+        <key>beatloop_64_toggle</key>
+        <description>Beatloop 64</description>
+        <status>0x97</status>
+        <midino>0x0F</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <!-- End Beatloop 64 -->
     </controls>
     <outputs/>
   </controller>
