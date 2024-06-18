@@ -2150,6 +2150,173 @@
         </options>
       </control>
       <!-- End Beatloop 64 -->
+      <!--  #####                                             -->
+      <!-- #     #   ##   #    # #####  #      ###### #####   -->
+      <!-- #        #  #  ##  ## #    # #      #      #    #  -->
+      <!--  #####  #    # # ## # #    # #      #####  #    #  -->
+      <!--       # ###### #    # #####  #      #      #####   -->
+      <!-- #     # #    # #    # #      #      #      #   #   -->
+      <!--  #####  #    # #    # #      ###### ###### #    #  -->
+      <control>
+        <group>[Sampler1]</group>
+        <key>play</key>
+        <description>Sampler 1</description>
+        <status>0x94</status>
+        <midino>0x10</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler2]</group>
+        <key>play</key>
+        <description>Sampler 2</description>
+        <status>0x94</status>
+        <midino>0x11</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler3]</group>
+        <key>play</key>
+        <description>Sampler 3</description>
+        <status>0x94</status>
+        <midino>0x12</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler4]</group>
+        <key>play</key>
+        <description>Sampler 4</description>
+        <status>0x94</status>
+        <midino>0x13</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler5]</group>
+        <key>play</key>
+        <description>Sampler 5</description>
+        <status>0x95</status>
+        <midino>0x10</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler6]</group>
+        <key>play</key>
+        <description>Sampler 6</description>
+        <status>0x95</status>
+        <midino>0x11</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler7]</group>
+        <key>play</key>
+        <description>Sampler 7</description>
+        <status>0x95</status>
+        <midino>0x12</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler8]</group>
+        <key>play</key>
+        <description>Sampler 8</description>
+        <status>0x95</status>
+        <midino>0x13</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler9]</group>
+        <key>play</key>
+        <description>Sampler 9</description>
+        <status>0x94</status>
+        <midino>0x14</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler10]</group>
+        <key>play</key>
+        <description>Sampler 10</description>
+        <status>0x94</status>
+        <midino>0x15</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler11]</group>
+        <key>play</key>
+        <description>Sampler 11</description>
+        <status>0x94</status>
+        <midino>0x16</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler12]</group>
+        <key>play</key>
+        <description>Sampler 12</description>
+        <status>0x94</status>
+        <midino>0x17</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler13]</group>
+        <key>play</key>
+        <description>Sampler 13</description>
+        <status>0x95</status>
+        <midino>0x14</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler14]</group>
+        <key>play</key>
+        <description>Sampler 14</description>
+        <status>0x95</status>
+        <midino>0x15</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler15]</group>
+        <key>play</key>
+        <description>Sampler 15</description>
+        <status>0x95</status>
+        <midino>0x16</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
+      <control>
+        <group>[Sampler16]</group>
+        <key>play</key>
+        <description>Sampler 16</description>
+        <status>0x95</status>
+        <midino>0x17</midino>
+        <options>
+          <normal/>
+        </options>
+      </control>
     </controls>
     <outputs/>
   </controller>
