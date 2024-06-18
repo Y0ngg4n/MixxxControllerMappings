@@ -10,6 +10,23 @@
       <file filename="Reloop-TerminalMix8-Ultimate.js" functionprefix="TerminalMix8"/>
     </scriptfiles>
     <controls>
+      <!--  #####                         -->
+      <!-- #     # #    # # ###### #####  -->
+      <!-- #       #    # # #        #    -->
+      <!--  #####  ###### # #####    #    -->
+      <!--       # #    # # #        #    -->
+      <!-- #     # #    # # #        #    -->
+      <!--  #####  #    # # #        #    -->
+      <control>
+        <group>[Channel1]</group>
+        <key>TerminalMix8.shiftButton</key>
+        <description>Shift Button</description>
+        <status>0x90</status>
+        <midino>0x1F</midino>
+        <options>
+          <script-binding/>
+        </options>
+      </control>
       <!-- #     #                         -->
       <!-- ##   ## # #    # ###### #####   -->
       <!-- # # # # #  #  #  #      #    #  -->
@@ -1098,42 +1115,42 @@
       <!-- Play -->
       <control>
         <group>[Channel1]</group>
-        <key>play</key>
+        <key>TerminalMix8.leftDeck.playButton.input</key>
         <description>Play</description>
         <status>0x90</status>
         <midino>0x05</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <control>
         <group>[Channel2]</group>
-        <key>play</key>
+        <key>TerminalMix8.activeButtons.play</key>
         <description>Play</description>
         <status>0x91</status>
         <midino>0x05</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <control>
         <group>[Channel3]</group>
-        <key>play</key>
+        <key>TerminalMix8.activeButtons.play</key>
         <description>Play</description>
         <status>0x92</status>
         <midino>0x05</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <control>
         <group>[Channel4]</group>
-        <key>play</key>
+        <key>TerminalMix8.activeButtons.play</key>
         <description>Play</description>
         <status>0x93</status>
         <midino>0x05</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <!-- End Play -->
@@ -2449,6 +2466,7 @@
         </options>
       </control>
       <!-- End Loop double -->
+      <!-- Save loop -->
       <control>
         <group>[Channel1]</group>
         <key>hotcue_8_setloop</key>
@@ -2489,6 +2507,7 @@
           <normal/>
         </options>
       </control>
+      <!-- Save loop -->
       <!-- End Manual Loop Mode -->
       <!--  #####                                             -->
       <!-- #     #   ##   #    # #####  #      ###### #####   -->
