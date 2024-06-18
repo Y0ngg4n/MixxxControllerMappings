@@ -434,6 +434,19 @@ var beatloopSizeListen = function (channel, outChannel) {
   );
 };
 
+
+
+
+
+TerminalMix8.loopSize = function (channel, control, value, status, group) {
+  var deckNumber = script.deckFromGroup(group);
+  if (value == 0x3f) {
+    engine.setValue("[Channel" + deckNumber + "]", "loop_halve", true);
+  } else if (value == 0x41) {
+    engine.setValue("[Channel" + deckNumber + "]", "loop_double", true);
+  }
+};
+
 //  #####
 // #     #   ##   #    # #####  #      ###### #####
 // #        #  #  ##  ## #    # #      #      #    #
