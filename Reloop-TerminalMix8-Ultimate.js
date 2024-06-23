@@ -37,18 +37,6 @@ var colors = new ColorMapper({
  //  #####  #    # # #        #
 TerminalMix8.shift = false;
 
-TerminalMix8.play = function (channel, control, value, status, group) {
-    if (value) {
-      if (TerminalMix8.shift){
-          engine.setValue(group, 'reverse', !(engine.getValue(group, 'reverse')))
-          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'reverse') ? 0x7f : 0x00);
-      } else {
-          engine.setValue(group, 'play', !(engine.getValue(group, 'play')))
-          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'play') ? 0x7f : 0x00);
-      }
-  }
-}
-
 TerminalMix8.shiftButton = function (channel, control, value, status, group) {
   if (value === 127) {
     TerminalMix8.shift = !TerminalMix8.shift;
@@ -106,10 +94,6 @@ var initMethods = function () {
   fxAssignedListener(2, 0x91);
   fxAssignedListener(1, 0x90);
   fxEnabledListener(2, 0x91);
-  // playingListener(1, 0x90);
-  // playingListener(2, 0x91);
-  // playingListener(3, 0x92);
-  // playingListener(4, 0x93);
   syncListener(1, 0x90);
   syncListener(2, 0x91);
   syncListener(3, 0x92);
@@ -697,19 +681,34 @@ var fxAssignedListener = function (channel, outChannel) {
 //  #       #      #    #   #   # #   ## #    #
 //  #       ###### #    #   #   # #    #  ####
 
-var playingListener = function (channel, outChannel) {
-  connections[connections.length] = engine.makeConnection(
-    "[Channel" + channel + "]",
-    "play",
-    function (value, group, control) {
-      if (value == 1) {
-        midi.sendShortMsg(outChannel, 0x05, 0x7f);
+
+TerminalMix8.play = function (channel, control, value, status, group) {
+    if (value) {
+      if (TerminalMix8.shift){
+          engine.setValue(group, 'reverse', !(engine.getValue(group, 'reverse')))
+          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'reverse') ? 0x7f : 0x00);
       } else {
-        midi.sendShortMsg(outChannel, 0x05, 0x00);
+          engine.setValue(group, 'play', !(engine.getValue(group, 'play')))
+          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'play') ? 0x7f : 0x00);
       }
-    },
-  );
-};
+  }
+}
+
+
+
+TerminalMix8.sync = function (channel, control, value, status, group) {
+    if (value) {
+      if (TerminalMix8.shift){
+          engine.setValue(group, 'sync_enabled', true)
+          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
+      } else {
+          engine.setValue(group, 'sync_mode', 0)
+          midi.sendShortMsg(0x90 + channel, control, 0x00);
+      }
+  }else{
+      midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
+  }
+}
 
 
 var syncListener = function (channel, outChannel) {
