@@ -94,10 +94,6 @@ var initMethods = function () {
   fxAssignedListener(2, 0x91);
   fxAssignedListener(1, 0x90);
   fxEnabledListener(2, 0x91);
-  syncListener(1, 0x90);
-  syncListener(2, 0x91);
-  syncListener(3, 0x92);
-  syncListener(4, 0x93);
   stutterListener(1, 0x90);
   stutterListener(2, 0x91);
   stutterListener(3, 0x92);
@@ -694,36 +690,37 @@ TerminalMix8.play = function (channel, control, value, status, group) {
   }
 }
 
-
+TerminalMix8.syncTimer = new Map();
 
 TerminalMix8.sync = function (channel, control, value, status, group) {
     if (value) {
       if (TerminalMix8.shift){
-          engine.setValue(group, 'sync_enabled', true)
-          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
-      } else {
+
           engine.setValue(group, 'sync_mode', 0)
           midi.sendShortMsg(0x90 + channel, control, 0x00);
-      }
+          } else {
+
+          if(TerminalMix8.syncTimer[channel]){
+            engine.setValue(group, 'sync_leader', true)
+            midi.sendShortMsg(0x90 + channel, control, 0x7f);
+            engine.stopTimer(TerminalMix8.syncTimer[channel]);
+            TerminalMix8.syncTimer.delete(channel);
+          } else {
+            engine.beginTimer(1000,() => {
+              engine.stopTimer(TerminalMix8.syncTimer[channel]);
+              TerminalMix8.syncTimer.delete(channel);
+            }, true);
+
+            engine.setValue(group, 'sync_enabled', true)
+            midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
+            }
+            }
   }else{
+      engine.setValue(group, 'sync_enabled', false)
       midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
   }
 }
 
-
-var syncListener = function (channel, outChannel) {
-  connections[connections.length] = engine.makeConnection(
-    "[Channel" + channel + "]",
-    "sync_enabled",
-    function (value, group, control) {
-      if (value == 1) {
-        midi.sendShortMsg(outChannel, 0x02, 0x7f);
-      } else {
-        midi.sendShortMsg(outChannel, 0x02, 0x00);
-      }
-    },
-  );
-};
 
 
 var stutterListener = function (channel, outChannel) {
