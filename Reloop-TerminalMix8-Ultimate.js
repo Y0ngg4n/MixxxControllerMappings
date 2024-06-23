@@ -35,80 +35,30 @@ var colors = new ColorMapper({
  //       # #    # # #        #
  // #     # #    # # #        #
  //  #####  #    # # #        #
-// A container for the functions of the active layer.
-// In the XML file, map the MIDI input handling functions to
-// properties of this object, for example, MyController.activeButtons.buttonA
-TerminalMix8.activeButtons = {};
+TerminalMix8.shift = false;
 
-// implement a constructor for a custom Deck object specific to your controller
-TerminalMix8.Deck = function (deckNumbers, midiChannel) {
-      // Call the generic Deck constructor to setup the currentDeck and deckNumbers properties,
-    // using Function.prototype.call to assign the custom Deck being constructed
-    // to 'this' in the context of the generic components.Deck constructor
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
-    components.Deck.call(this, deckNumbers);
-  this.playButton = new components.PlayButton({
-      midi: [0x90, 0x05],
-      group: "[Channel1]",
-      key: "playButton",
-  });
-    // ... define as many other Components as necessary ...
-
-    // Set the group properties of the above Components and connect their output callback functions
-    // Without this, the group property for each Component would have to be specified to its
-    // constructor.
-    this.reconnectComponents(function (c) {
-        if (c.group === undefined) {
-            // 'this' inside a function passed to reconnectComponents refers to the ComponentContainer
-            // so 'this' refers to the custom Deck object being constructed
-            c.group = this.currentDeck;
-        }
-    });
-    // when called with JavaScript's 'new' keyword, a constructor function
-    // implicitly returns 'this'
-};
-  // give your custom Deck all the methods of the generic Deck in the Componemts library
-TerminalMix8.Deck.prototype = new components.Deck();
-
-TerminalMix8.unshiftedButtons = {
-    play = function (channel, control, value, status, group) {
+TerminalMix8.play = function (channel, control, value, status, group) {
     if (value) {
-      currentValue = engine.getValue(group, 'play')
-        // toggle whether the deck is playing
-      engine.setValue(group, 'play', ! (currentValue))
-      midi.sendShortMsg(0x90 + channel, control, currentValue ? 0x00 : 0x7f);
-    }},
-};
-
-TerminalMix8.shiftedButtons = {
-  play = function (channel, control, value, status, group) {
-    if (value) {
-      currentValue = engine.getValue(group, 'reverse')
-        // toggle whether the deck is playing
-      engine.setValue(group, 'reverse', ! (currentValue))
-      midi.sendShortMsg(0x90 + channel, control, currentValue ? 0x00 : 0x7f);
-    }},
-
-};
-
-TerminalMix8.shiftButton = function (channel, control, value, status, group) {
-    // This function is mapped to the incoming MIDI signals for the shift button in the XML file
-
-    if (value === 127) { // shift button pressed
-      TerminalMix8.Deck.shift()
-//        engine.makeConnection(group,  "TerminalMix8.shiftButton", true); // disconnect callbacks for unshifted layer
-        // see "Automatic reactions to changes in Mixxx" section above
-       // TerminalMix8.activeButtons = TerminalMix8.shiftedButtons;
-       // engine.makeConnection(group,  "TerminalMix8.shiftButton"); // disconnect callbacks for unshifted layer
-   //   engine.connectControl(group, "TerminalMix8.shiftButton"); // connect callbacks for shifted layer
-    } else { // shift button released
-      TerminialMix8.Deck.unshift()
-    //    engine.connectControl(group, control, true); // disconnect callbacks for shifted layer
-    //    TerminalMix8.activeButtons = TerminalMix8.unshiftedButtons;
-    //    engine.connectControl(group, "TerminalMix8.shiftButton"); // connect callbacks for unshifted layer
-    }
+      if (TerminalMix8.shift){
+          engine.setValue(group, 'reverse', !(engine.getValue(group, 'reverse')))
+          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'reverse') ? 0x7f : 0x00);
+      } else {
+          engine.setValue(group, 'play', !(engine.getValue(group, 'play')))
+          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'play') ? 0x7f : 0x00);
+      }
+  }
 }
 
+TerminalMix8.shiftButton = function (channel, control, value, status, group) {
+  if (value === 127) {
+    TerminalMix8.shift = !TerminalMix8.shift;
+  }
+  // TODO: Fix press instead of toggle
+ // else {
+ //   TerminalMix8.shift = false;
+ //   midi.sendShortMsg(0x90 + channel, 0x1F, 0x00);
+ // }
+}
 // ###
 //  #  #    # # #####
 //  #  ##   # #   #
@@ -123,10 +73,6 @@ TerminalMix8.init = function () {
   // control surface. (Mixxx will be initialized with current values)
   midi.sendSysexMsg(ControllerStatusSysex, ControllerStatusSysex.length);
   midi.sendShortMsg(0x94, 0x00, 0x30);
-  TerminalMix8.activeButtons = TerminalMix8.unshiftedButtons;
-    // create an instance of your custom Deck object for each side of your controller
-  TerminalMix8.leftDeck = new TerminalMix8.Deck([1, 3], 1);
-  TerminalMix8.rightDeck = new TerminalMix8.Deck([2, 4], 2);
   loadedTrack(1, 75, [0x30, 0x4c], 0x94);
   loadedTrack(2, 75, [0x30, 0x4c], 0x95);
   loadedTrack(3, 75, [0x30, 0x4c], 0x96);
