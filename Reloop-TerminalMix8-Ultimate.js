@@ -90,10 +90,14 @@ var initMethods = function () {
   deckTrackLoadedListener(2, 0x91);
   deckTrackLoadedListener(3, 0x92);
   deckTrackLoadedListener(4, 0x93);
-  fxEnabledListener(1, 0x90);
-  fxAssignedListener(2, 0x91);
   fxAssignedListener(1, 0x90);
+  fxAssignedListener(2, 0x91);
+  fxAssignedListener(3, 0x92);
+  fxAssignedListener(4, 0x93);
+  fxEnabledListener(1, 0x90);
   fxEnabledListener(2, 0x91);
+  fxEnabledListener(3, 0x92);
+  fxEnabledListener(4, 0x93);
   stutterListener(1, 0x90);
   stutterListener(2, 0x91);
   stutterListener(3, 0x92);
@@ -555,6 +559,18 @@ var samplerListen = function (outChannel, samplerOffset) {
 // #     # #      #    # #    # #      #    # #    # #   ## #      #    #
 // #     # ###### #    # #####  #      #    #  ####  #    # ######  ####
 
+
+TerminalMix8.headphones = function (channel, control, value, status, group) {
+    if (value) {
+      if (TerminalMix8.shift){
+          TerminalMix8.shift = false;
+          engine.setValue(group, 'beats_translate_curpos', true)
+      } else {
+          engine.setValue(group, 'pfl', !(engine.getValue(group, 'pfl')))
+      }
+  }
+}
+
 var headphonesListener = function (channel, outChannel) {
   connections[connections.length] = engine.makeConnection(
     "[Channel" + channel + "]",
@@ -692,6 +708,7 @@ var fxAssignedListener = function (channel, outChannel) {
 TerminalMix8.play = function (channel, control, value, status, group) {
     if (value) {
       if (TerminalMix8.shift){
+          TerminalMix8.shift = false;
           engine.setValue(group, 'reverse', !(engine.getValue(group, 'reverse')))
       } else {
           engine.setValue(group, 'play', !(engine.getValue(group, 'play')))
@@ -717,6 +734,7 @@ TerminalMix8.syncTimer = new Map();
 TerminalMix8.sync = function (channel, control, value, status, group) {
     if (value == 127) {
       if (TerminalMix8.shift){
+        TerminalMix8.shift = false;
         engine.setValue(group, 'sync_mode', 0)
         midi.sendShortMsg(0x90 + channel, control, 0x00);
       } else {
@@ -767,6 +785,7 @@ var stutterListener = function (channel, outChannel) {
 TerminalMix8.cue = function (channel, control, value, status, group) {
     if (value) {
       if (TerminalMix8.shift){
+          TerminalMix8.shift = false;
           engine.setValue(group, 'start', true)
       } else {
           engine.setValue(group, 'cue_default', true)
@@ -800,6 +819,7 @@ var cueListener = function (channel, outChannel) {
 TerminalMix8.loadTrack = function (channel, control, value, status, group) {
     if (value) {
       if (TerminalMix8.shift){
+          TerminalMix8.shift = false;
           switch(channel){
             case 0:
               engine.setValue(group, 'CloneFromDeck', 2)
@@ -814,10 +834,8 @@ TerminalMix8.loadTrack = function (channel, control, value, status, group) {
               engine.setValue(group, 'CloneFromDeck', 3)
               break;
           }
-          midi.sendShortMsg(0x90 + channel, control, 0x7f);
       } else {
           engine.setValue(group, 'LoadSelectedTrack', true)
-          midi.sendShortMsg(0x90 + channel, control, 0x7f);
       }
   }
 }
