@@ -98,11 +98,6 @@ var initMethods = function () {
   stutterListener(2, 0x91);
   stutterListener(3, 0x92);
   stutterListener(4, 0x93);
-  cueListener(1, 0x90);
-  cueListener(2, 0x91);
-  cueListener(3, 0x92);
-  cueListener(4, 0x93);
-
 };
 
 //  #####
@@ -710,7 +705,7 @@ TerminalMix8.sync = function (channel, control, value, status, group) {
       if(TerminalMix8.syncTimer[channel] !== 0){
           engine.setValue(group, 'sync_enabled', false);
           midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
-      }
+        }
     }
 };
 
@@ -730,21 +725,17 @@ var stutterListener = function (channel, outChannel) {
 };
 
 
-
-
-var cueListener = function (channel, outChannel) {
-  connections[connections.length] = engine.makeConnection(
-    "[Channel" + channel + "]",
-    "cue_default",
-    function (value, group, control) {
-      if (value == 1) {
-        midi.sendShortMsg(outChannel, 0x04, 0x7f);
+TerminalMix8.cue = function (channel, control, value, status, group) {
+    if (value) {
+      if (TerminalMix8.shift){
+          engine.setValue(group, 'start', true)
+          midi.sendShortMsg(0x90 + channel, control, 0x7f);
       } else {
-        midi.sendShortMsg(outChannel, 0x04, 0x00);
+          engine.setValue(group, 'cue_default', true)
+          midi.sendShortMsg(0x90 + channel, control, 0x7f);
       }
-    },
-  );
-};
+  }
+}
 
 
 // #                               #######
