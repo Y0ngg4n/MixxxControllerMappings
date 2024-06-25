@@ -693,34 +693,26 @@ TerminalMix8.play = function (channel, control, value, status, group) {
 TerminalMix8.syncTimer = new Map();
 
 TerminalMix8.sync = function (channel, control, value, status, group) {
-    if (value) {
+    if (value == 127) {
       if (TerminalMix8.shift){
-
-          engine.setValue(group, 'sync_mode', 0)
-          midi.sendShortMsg(0x90 + channel, control, 0x00);
-          } else {
-
-          if(TerminalMix8.syncTimer[channel]){
-            engine.setValue(group, 'sync_leader', true)
+        engine.setValue(group, 'sync_mode', 0)
+        midi.sendShortMsg(0x90 + channel, control, 0x00);
+      } else {
+          TerminalMix8.syncTimer[channel] = engine.beginTimer(1000,() => {
+            TerminalMix8.syncTimer[channel] = 0;
             midi.sendShortMsg(0x90 + channel, control, 0x7f);
-            engine.stopTimer(TerminalMix8.syncTimer[channel]);
-            TerminalMix8.syncTimer.delete(channel);
-          } else {
-            engine.beginTimer(1000,() => {
-              engine.stopTimer(TerminalMix8.syncTimer[channel]);
-              TerminalMix8.syncTimer.delete(channel);
-            }, true);
+          }, true);
 
-            engine.setValue(group, 'sync_enabled', true)
-            midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
-            }
-            }
-  }else{
-      engine.setValue(group, 'sync_enabled', false)
-      midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
-  }
-}
-
+          engine.setValue(group, 'sync_enabled', true)
+          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
+      }
+    } else {
+      if(TerminalMix8.syncTimer[channel] !== 0){
+          engine.setValue(group, 'sync_enabled', false);
+          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
+      }
+    }
+};
 
 
 var stutterListener = function (channel, outChannel) {
