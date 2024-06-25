@@ -98,6 +98,18 @@ var initMethods = function () {
   stutterListener(2, 0x91);
   stutterListener(3, 0x92);
   stutterListener(4, 0x93);
+  playingListener(1, 0x90);
+  playingListener(2, 0x91);
+  playingListener(3, 0x92);
+  playingListener(4, 0x93);
+  syncListener(1, 0x90);
+  syncListener(2, 0x91);
+  syncListener(3, 0x92);
+  syncListener(4, 0x93);
+  cueListener(1, 0x90);
+  cueListener(2, 0x91);
+  cueListener(3, 0x92);
+  cueListener(4, 0x93);
 };
 
 //  #####
@@ -372,6 +384,10 @@ var beatloopListen = function (channel, outChannel) {
       else midi.sendShortMsg(outChannel, 14, disabledColor);
     },
   );
+  playingListener(1, 0x90);
+  playingListener(2, 0x91);
+  playingListener(3, 0x92);
+  playingListener(4, 0x93);
   connections[connections.length] = engine.makeConnection(
     "[Channel" + channel + "]",
     "beatloop_64_enabled",
@@ -677,13 +693,24 @@ TerminalMix8.play = function (channel, control, value, status, group) {
     if (value) {
       if (TerminalMix8.shift){
           engine.setValue(group, 'reverse', !(engine.getValue(group, 'reverse')))
-          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'reverse') ? 0x7f : 0x00);
       } else {
           engine.setValue(group, 'play', !(engine.getValue(group, 'play')))
-          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'play') ? 0x7f : 0x00);
       }
   }
 }
+var playingListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x05, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x05, 0x00);
+      }
+    },
+  );
+};
 
 TerminalMix8.syncTimer = new Map();
 
@@ -695,18 +722,30 @@ TerminalMix8.sync = function (channel, control, value, status, group) {
       } else {
           TerminalMix8.syncTimer[channel] = engine.beginTimer(1000,() => {
             TerminalMix8.syncTimer[channel] = 0;
-            midi.sendShortMsg(0x90 + channel, control, 0x7f);
           }, true);
 
           engine.setValue(group, 'sync_enabled', true)
-          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
       }
     } else {
       if(TerminalMix8.syncTimer[channel] !== 0){
           engine.setValue(group, 'sync_enabled', false);
-          midi.sendShortMsg(0x90 + channel, control, engine.getValue(group, 'sync_enabled') ? 0x7f : 0x00);
         }
     }
+};
+
+
+var syncListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "sync_enabled",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x02, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x02, 0x00);
+      }
+    },
+  );
 };
 
 
@@ -729,14 +768,26 @@ TerminalMix8.cue = function (channel, control, value, status, group) {
     if (value) {
       if (TerminalMix8.shift){
           engine.setValue(group, 'start', true)
-          midi.sendShortMsg(0x90 + channel, control, 0x7f);
       } else {
           engine.setValue(group, 'cue_default', true)
-          midi.sendShortMsg(0x90 + channel, control, 0x7f);
       }
   }
 }
 
+
+var cueListener = function (channel, outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Channel" + channel + "]",
+    "cue_indicator",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x04, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x04, 0x00);
+      }
+    },
+  );
+};
 
 // #                               #######
 // #        ####    ##   #####        #    #####    ##    ####  #    #      ##   #    # # #    #   ##   ##### #  ####  #    #
@@ -745,6 +796,32 @@ TerminalMix8.cue = function (channel, control, value, status, group) {
 // #       #    # ###### #    #       #    #####  ###### #      #  #      ###### #  # # # #    # ######   #   # #    # #  # #
 // #       #    # #    # #    #       #    #   #  #    # #    # #   #     #    # #   ## # #    # #    #   #   # #    # #   ##
 // #######  ####  #    # #####        #    #    # #    #  ####  #    #    #    # #    # # #    # #    #   #   #  ####  #    #
+
+TerminalMix8.loadTrack = function (channel, control, value, status, group) {
+    if (value) {
+      if (TerminalMix8.shift){
+          switch(channel){
+            case 0:
+              engine.setValue(group, 'CloneFromDeck', 2)
+              break;
+            case 1:
+              engine.setValue(group, 'CloneFromDeck', 1)
+              break;
+            case 2:
+              engine.setValue(group, 'CloneFromDeck', 4)
+              break;
+            case 3:
+              engine.setValue(group, 'CloneFromDeck', 3)
+              break;
+          }
+          midi.sendShortMsg(0x90 + channel, control, 0x7f);
+      } else {
+          engine.setValue(group, 'LoadSelectedTrack', true)
+          midi.sendShortMsg(0x90 + channel, control, 0x7f);
+      }
+  }
+}
+
 
 var deckTrackLoadedListener = function (channel, outChannel) {
   connections[connections.length] = engine.makeConnection(

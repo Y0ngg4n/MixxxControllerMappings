@@ -269,42 +269,42 @@
       <!-- ####### # #####  #    # #    # #    #   #    -->
       <control>
         <group>[Channel1]</group>
-        <key>LoadSelectedTrack</key>
+        <key>TerminalMix8.loadTrack</key>
         <description>Load Track</description>
         <status>0x90</status>
         <midino>0x10</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <control>
         <group>[Channel2]</group>
-        <key>LoadSelectedTrack</key>
+        <key>TerminalMix8.loadTrack</key>
         <description>Load Track</description>
         <status>0x91</status>
         <midino>0x10</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <control>
         <group>[Channel3]</group>
-        <key>LoadSelectedTrack</key>
+        <key>TerminalMix8.loadTrack</key>
         <description>Load Track</description>
         <status>0x92</status>
         <midino>0x10</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <control>
         <group>[Channel4]</group>
-        <key>LoadSelectedTrack</key>
+        <key>TerminalMix8.loadTrack</key>
         <description>Load Track</description>
         <status>0x93</status>
         <midino>0x10</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <control>
