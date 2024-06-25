@@ -330,22 +330,22 @@
       </control>
       <control>
         <group>[Skin]</group>
-        <key>show_maximized_library</key>
+        <key>TerminalMix8.area</key>
         <description>Toggle Big Library</description>
         <status>0x90</status>
         <midino>0x24</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <control>
         <group>[Skin]</group>
-        <key>show_mixer</key>
+        <key>TerminalMix8.view</key>
         <description>Toggle Mixer</description>
         <status>0x90</status>
         <midino>0x25</midino>
         <options>
-          <normal/>
+          <script-binding/>
         </options>
       </control>
       <control>

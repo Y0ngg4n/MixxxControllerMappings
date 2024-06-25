@@ -114,6 +114,9 @@ var initMethods = function () {
   cueListener(2, 0x91);
   cueListener(3, 0x92);
   cueListener(4, 0x93);
+  areaListener(0x90);
+  viewListener(0x90);
+  previewListener(0x90);
 };
 
 //  #####
@@ -170,12 +173,84 @@ TerminalMix8.allSamplerGain = function (
 // #       # #    # #   #  #    # #   #    #
 // ####### # #####  #    # #    # #    #   #
 
+TerminalMix8.area = function (channel, control, value, status, group) {
+    if (value) {
+      if (TerminalMix8.shift){
+          TerminalMix8.shift = false;
+          engine.setValue(group, 'show_effectrack', !(engine.getValue(group, 'show_effectrack')))
+      } else {
+          engine.setValue(group, 'show_maximized_library', !(engine.getValue(group, 'show_maximized_library')))
+      }
+  }
+}
+
+var areaListener = function (outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Skin]",
+    "show_maximized_library",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x24, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x24, 0x00);
+      }
+    },
+  );
+};
+
+TerminalMix8.view = function (channel, control, value, status, group) {
+    if (value) {
+      if (TerminalMix8.shift){
+          TerminalMix8.shift = false;
+          engine.setValue(group, 'show_samplers', !(engine.getValue(group, 'show_samplers')))
+      } else {
+          engine.setValue(group, 'show_mixer', !(engine.getValue(group, 'show_mixer')))
+      }
+  }
+}
+
+var viewListener = function (outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[Skin]",
+    "show_mixer",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x25, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x25, 0x00);
+      }
+    },
+  );
+};
+
+var previewListener = function (outChannel) {
+  connections[connections.length] = engine.makeConnection(
+    "[PreviewDeck1]",
+    "play",
+    function (value, group, control) {
+      if (value == 1) {
+        midi.sendShortMsg(outChannel, 0x27, 0x7f);
+      } else {
+        midi.sendShortMsg(outChannel, 0x27, 0x00);
+      }
+    },
+  );
+};
+
 TerminalMix8.preview = function (channel, control, value, status, group) {
   if (value != 0) {
-    if (engine.getValue("[PreviewDeck1]", "play") != 1) {
-      engine.setValue("[PreviewDeck1]", "LoadSelectedTrackAndPlay", 1);
-    } else {
-      engine.setValue("[PreviewDeck1]", "play", 0);
+    if (TerminalMix8.shift){
+        TerminalMix8.shift = false;
+        engine.setValue("[PreviewDeck1]", "eject", true);
+        engine.setValue("[PreviewDeck]", "show_previewdeck", false)
+    }else{
+        engine.setValue("[PreviewDeck]", "show_previewdeck", true)
+        if (engine.getValue("[PreviewDeck1]", "play") != 1) {
+          engine.setValue("[PreviewDeck1]", "play", 1);
+          engine.setValue("[PreviewDeck1]", "LoadSelectedTrackAndPlay", 1);
+        } else {
+          engine.setValue("[PreviewDeck1]", "play", 0);
+        }
     }
   }
 };
@@ -807,6 +882,9 @@ var cueListener = function (channel, outChannel) {
     },
   );
 };
+
+
+
 
 // #                               #######
 // #        ####    ##   #####        #    #####    ##    ####  #    #      ##   #    # # #    #   ##   ##### #  ####  #    #
